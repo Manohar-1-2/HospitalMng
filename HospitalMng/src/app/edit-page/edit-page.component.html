@@ -1,0 +1,74 @@
+<div class="patient-edit">
+    <h2>Edit Patient Information</h2>
+  
+    <form>
+      <!-- User ID (read-only) -->
+      <div class="form-group">
+        <label for="userId">User ID:</label>
+        <input type="text" id="userId" [(ngModel)]="patient.userUID" name="userId" class="form-control" readonly />
+      </div>
+  
+      <!-- First Name -->
+      <div class="form-group">
+        <label for="firstName">First Name:</label>
+        <input type="text" id="firstName" [(ngModel)]="patient.firstName" name="firstName" class="form-control" />
+      </div>
+  
+      <!-- Last Name -->
+      <div class="form-group">
+        <label for="lastName">Last Name:</label>
+        <input type="text" id="lastName" [(ngModel)]="patient.lastName" name="lastName" class="form-control" />
+      </div>
+  
+      <!-- Date of Birth -->
+      <div class="form-group">
+        <label for="dob">Date of Birth:</label>
+        <input type="date" id="dob" [(ngModel)]="patient.dob" name="dob" class="form-control" />
+      </div>
+  
+      <!-- Mobile Number -->
+      <div class="form-group">
+        <label for="mobile">Mobile Number:</label>
+        <input type="text" id="mobile" [(ngModel)]="patient.mobile" name="mobile" class="form-control" />
+      </div>
+  
+      <!-- Address -->
+      <div class="form-group">
+        <label for="address">Address:</label>
+        <textarea id="address" [(ngModel)]="patient.address" name="address" class="form-control"></textarea>
+      </div>
+  
+      <!-- State -->
+      <div class="form-group">
+        <label for="state">State:</label>
+        <input type="text" id="state" [(ngModel)]="patient.state" name="state" class="form-control" />
+      </div>
+  
+      <!-- Country -->
+      <div class="form-group">
+        <label for="country">Country:</label>
+        <input type="text" id="country" [(ngModel)]="patient.country" name="country" class="form-control" />
+      </div>
+  
+      <!-- Relative Information -->
+      <div class="form-group">
+        <h3>Relative Information</h3>
+  
+        <label for="relativeName">Relative Name:</label>
+        <input type="text" id="relativeName" [(ngModel)]="patient.relativeName" name="relativeName" class="form-control" />
+  
+        <label for="relativeNumber">Relative Number:</label>
+        <input type="text" id="relativeNumber" [(ngModel)]="patient.relativeNumber" name="relativeNumber" class="form-control" />
+      </div>
+  
+      <!-- Illness Details -->
+      <div class="form-group">
+        <label for="illnessDetails">Illness Details:</label>
+        <textarea id="illnessDetails" [(ngModel)]="patient.illnessDetails" name="illnessDetails" class="form-control"></textarea>
+      </div>
+  
+      <!-- Update Button -->
+      <button type="button" (click)="updatePatient()" class="btn btn-primary">Update</button>
+    </form>
+  </div>
+  

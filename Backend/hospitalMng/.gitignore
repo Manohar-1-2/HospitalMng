@@ -1,0 +1,86 @@
+# Compiled Object files
+*.o
+*.obj
+*.dll
+*.exe
+*.log
+*.so
+
+# ASP.NET Scaffolding
+ScaffoldingReadMe.txt
+
+# User-specific files
+*.rsuser
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Auto-generated files
+*_i.c
+*_p.c
+*_i.h
+*.ilk
+*.meta
+*.pdb
+*.obj
+*.cache
+*.bak
+*.swp
+
+# Temporary files
+*.tmp
+*.temp
+*.log
+*.vspscc
+*.vssscc
+
+# Build Folders
+bin/
+obj/
+
+# Visual Studio 2019/2022 Cache/Backup Folders
+.vscode/
+.vs/
+.vscode/
+
+# Rider project directories
+.idea/
+
+# IIS config files
+/.vs/
+/.vscode/
+
+# Windows image file caches
+Thumbs.db
+ehthumbs.db
+
+# Files that might appear on certain OS
+*.DS_Store
+.DS_Store
+
+# Log files
+*.log
+
+# NPM related files (if using npm in the project)
+node_modules/
+
+# Packages directory (if using NuGet for package management)
+packages/
+*.nuget/
+
+# Rider-specific settings
+.idea/
+
+# Local history
+.history/
+
+# Resharper files
+_ReSharper/
+*.DotSettings.user
+
+# JetBrains Rider
+.idea/
+
+# Visual Studio Code settings
+.vscode/
