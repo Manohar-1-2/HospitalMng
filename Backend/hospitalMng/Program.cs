@@ -10,6 +10,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using BCrypt.Net;
 using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
 
 // Define the DbContext and User class before the top-level statements
 
@@ -141,11 +142,124 @@ app.MapGet("/admin", [Authorize(Roles = "admin")] async (ApplicationDbContext db
             u.RelativeName,
             u.RelativeNumber,
             u.IllnessDetails,
+            Reports = dbContext.Reports
+                .Where(r => r.UserUID == u.UserUID) // Fetch reports for each user
+                .Select(r => new // Select relevant fields for reports
+                {
+                    r.Title,
+                    r.UserUID,
+                    r.FilePath
+                })
+                .ToList() 
         })
         .ToListAsync();
 
     // Return the list of non-admin users
     return Results.Ok(nonAdminUsers);
+});
+
+app.MapPost("/admin/editpatientdetials", [Authorize(Roles = "admin")] async (ApplicationDbContext dbContext,User user) =>
+{
+    var patient = await dbContext.Users.FirstOrDefaultAsync(p => p.UserUID == user.UserUID);
+     if (patient == null)
+    {
+        return Results.NotFound("Patient not found.");
+    }
+    // Update patient details
+    patient.FirstName = user.FirstName;
+    patient.LastName = user.LastName;
+    patient.Dob = user.Dob;
+    patient.Mobile = user.Mobile;
+    patient.Address = user.Address;
+    patient.State = user.State;
+    patient.Country = user.Country;
+    patient.RelativeName = user.RelativeName;
+    patient.RelativeNumber = user.RelativeNumber;
+    patient.IllnessDetails = user.IllnessDetails;
+
+    // Save changes to the database
+    await dbContext.SaveChangesAsync();
+
+    return Results.Ok("Patient details updated successfully.");
+    
+});
+
+app.MapPost("/admin/uploadreports", [Authorize(Roles = "admin")] async (ApplicationDbContext dbContext, HttpContext httpContext) =>
+{
+    // Ensure the request contains multipart/form-data
+    if (!httpContext.Request.HasFormContentType)
+    {
+        return Results.BadRequest("Invalid content type.");
+    }
+
+    var form = await httpContext.Request.ReadFormAsync();
+    
+    var userUID = form["UserUID"].ToString();
+    var title = form["title"].ToString();
+    var file = form.Files.GetFile("pdf");
+    Console.WriteLine($"UserUID: {userUID}, Title: {title}, Files Count: {file==null}");
+    if (string.IsNullOrEmpty(userUID) || string.IsNullOrEmpty(title) || file == null)
+    {
+        return Results.BadRequest("UserUID, title, and file are required.");
+    }
+
+    // Define the file path to save the uploaded file
+    var filePath = Path.Combine("uploads", file.FileName); // Adjust the path as necessary
+
+    // Save the uploaded file
+    using (var fileStream = new FileStream(filePath, FileMode.Create))
+    {
+        await file.CopyToAsync(fileStream);
+    }
+
+    // Create a new report entity
+    var report = new Report
+    {
+        UserUID = userUID,
+        Title = title,
+        FilePath = filePath, // Store the file path in the database
+        CreatedAt = DateTime.UtcNow // Set the timestamp to the current time
+    };
+
+    // Save the report to the database
+    await dbContext.Reports.AddAsync(report);
+    await dbContext.SaveChangesAsync();
+
+    return Results.Ok("Report uploaded successfully.");
+});
+app.MapGet("/admin/downloadreport/{fileName}", [Authorize] async (string fileName, ApplicationDbContext dbContext, HttpContext httpContext) =>
+{
+    // Get the UserUID of the currently logged-in user
+    var currentUserId = httpContext.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
+    // Define the path where files are stored
+    var filePath = Path.Combine("uploads", fileName); // Adjust the path as necessary
+
+    // Check if the file exists
+    if (!System.IO.File.Exists(filePath))
+    {
+        return Results.NotFound("File not found.");
+    }
+
+    // Get the report from the database
+    var report = await dbContext.Reports.FirstOrDefaultAsync(r => r.FilePath == filePath);
+
+    if (report == null)
+    {
+        return Results.NotFound("Report not found.");
+    }
+
+    // Check if the user is an admin or the owner of the report
+    var userRole = httpContext.User.IsInRole("admin");
+
+    if (!userRole && report.UserUID != currentUserId)
+    {
+        return Results.Forbid();
+    }
+
+    // Return the file as a downloadable response
+    var fileBytes = await System.IO.File.ReadAllBytesAsync(filePath);
+    return Results.File(fileBytes, "application/pdf", fileName); // Change MIME type as necessary
 });
 
 app.MapGet("/patient", [Authorize(Roles = "patient")] () =>
@@ -155,13 +269,13 @@ app.MapGet("/patient", [Authorize(Roles = "patient")] () =>
 
 app.Run();
 
-
 public class ApplicationDbContext : DbContext
 {
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
 
     // Define your DbSet(s) here
     public DbSet<User> Users { get; set; }
+    public DbSet<Report> Reports { get; set; }
 }
 
 public class User
@@ -181,7 +295,15 @@ public class User
     public string IllnessDetails { get; set; }
     public string Role { get; set; } // Corresponds to illnessDetails
 }
+public class Report
+{
 
+    public int Id { get; set; } // Primary key
+    public string UserUID { get; set; } // User ID
+    public string Title { get; set; } // Title of the report
+    public string FileName { get; set; }
+    public DateTime CreatedAt { get; set; } // Timestamp for when the report is created
+}
 
 public class UserDtoLogin
 {

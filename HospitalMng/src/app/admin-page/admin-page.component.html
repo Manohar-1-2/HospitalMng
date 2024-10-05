@@ -1,27 +1,51 @@
 <div class="user-list">
-    <h2>Users</h2>
-    <div *ngFor="let user of data" class="user-card">
-      <div class="user-info">
-        <p><strong>User ID:</strong> {{ user.userUID }}</p>
-        <p><strong>Name:</strong> {{ user.firstName }} {{ user.lastName }}</p>
-        <p><strong>Date of Birth:</strong> {{ user.dob | date }}</p>
-        <p><strong>Mobile:</strong> {{ user.mobile }}</p>
-        <p><strong>Address:</strong> {{ user.address }}</p>
-        <p><strong>State:</strong> {{ user.state }}</p>
-        <p><strong>Country:</strong> {{ user.country }}</p>
+  <h2>Users</h2>
+  <div *ngFor="let user of data" class="user-card">
+    <div class="user-info">
+      <p><strong>User ID:</strong> {{ user.userUID }}</p>
+      <p><strong>Name:</strong> {{ user.firstName }} {{ user.lastName }}</p>
+      <p><strong>Date of Birth:</strong> {{ user.dob | date }}</p>
+      <p><strong>Mobile:</strong> {{ user.mobile }}</p>
+      <p><strong>Address:</strong> {{ user.address }}</p>
+      <p><strong>State:</strong> {{ user.state }}</p>
+      <p><strong>Country:</strong> {{ user.country }}</p>
 
-        <details class="relative-details">
-            <summary>Relative Information</summary>
-            <p><strong>Name:</strong> {{ user.relativeName }}</p>
-            <p><strong>Number:</strong> {{ user.relativeNumber }}</p>
-          </details>
+      <details class="relative-details">
+        <summary>Relative Information</summary>
+        <p><strong>Name:</strong> {{ user.relativeName }}</p>
+        <p><strong>Number:</strong> {{ user.relativeNumber }}</p>
+      </details>
 
-        <details class="illness-details">
-          <summary>Illness Details</summary>
-          <p>{{ user.illnessDetails }}</p>
-        </details>
-        <button class="edit-btn" (click)="editUser(user)">Edit</button>
+      <details class="illness-details">
+        <summary>Illness Details</summary>
+        <p>{{ user.illnessDetails }}</p>
+      </details>
+
+      <!-- Existing reports -->
+      <div *ngIf="user.reports?.length > 0">
+        <h3>Uploaded Reports</h3>
+        <ul>
+          <li *ngFor="let report of user.reports">
+           <p *ngIf="user.userUID===report.userUID"> {{ report.title }} - {{report.fileName}}</p>
+          </li>
+        </ul>
+      </div>
+
+      <!-- New report form -->
+      <div class="new-report-form">
+        <h3>Create New Report</h3>
+        <form (ngSubmit)="uploadReport(user.userUID)">
+          <div class="form-group">
+            <label for="reportTitle">Title:</label>
+            <input type="text" id="reportTitle" [(ngModel)]="newReport.title" name="reportTitle" class="form-control" />
+          </div>
+          <div class="form-group">
+            <label for="reportFile">Upload PDF:</label>
+            <input type="file" id="reportFile" (change)="onFileChange($event, user.userUID)" name="reportFile" class="form-control" />
+          </div>
+          <button type="submit" class="btn btn-primary">Upload Report</button>
+        </form>
       </div>
     </div>
   </div>
-  
+</div>
