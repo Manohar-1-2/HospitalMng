@@ -148,7 +148,7 @@ app.MapGet("/admin", [Authorize(Roles = "admin")] async (ApplicationDbContext db
                 {
                     r.Title,
                     r.UserUID,
-                    r.FilePath
+                    r.FileName
                 })
                 .ToList() 
         })
@@ -217,7 +217,7 @@ app.MapPost("/admin/uploadreports", [Authorize(Roles = "admin")] async (Applicat
     {
         UserUID = userUID,
         Title = title,
-        FilePath = filePath, // Store the file path in the database
+        FileName = file.FileName, // Store the file path in the database
         CreatedAt = DateTime.UtcNow // Set the timestamp to the current time
     };
 
@@ -242,7 +242,7 @@ app.MapGet("/admin/downloadreport/{fileName}", [Authorize] async (string fileNam
     }
 
     // Get the report from the database
-    var report = await dbContext.Reports.FirstOrDefaultAsync(r => r.FilePath == filePath);
+    var report = await dbContext.Reports.FirstOrDefaultAsync(r => r.FileName == filePath);
 
     if (report == null)
     {
