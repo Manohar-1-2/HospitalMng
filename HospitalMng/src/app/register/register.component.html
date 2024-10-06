@@ -1,89 +1,97 @@
 <div class="register-container">
-    <h2>Register</h2>
-    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="register-form">
-      <div class="form-group">
-        <label for="firstName">First Name</label>
-        <input formControlName="firstName" type="text" id="firstName" class="form-control">
-        <div class="error-message" *ngIf="registerForm.get('firstName')?.invalid && registerForm.get('firstName')?.touched">
-          First Name is required and must be at least 2 characters long.
+  <h2 class="heading">Patient Registration</h2>
+  <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="register-form">
+    <div class="grid-container">
+      <!-- First column: First 7 form-group elements -->
+      <div class="column">
+        <div class="form-group">
+          <label for="firstName">First Name</label>
+          <input formControlName="firstName" type="text" id="firstName" class="form-control" />
+          <div class="error-message" *ngIf="registerForm.get('firstName')?.invalid && registerForm.get('firstName')?.touched">
+            First Name is required and must be at least 2 characters long.
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="lastName">Last Name</label>
+          <input formControlName="lastName" type="text" id="lastName" class="form-control" />
+          <div class="error-message" *ngIf="registerForm.get('lastName')?.invalid && registerForm.get('lastName')?.touched">
+            Last Name is required and must be at least 2 characters long.
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="dob">Date of Birth</label>
+          <input formControlName="dob" type="date" id="dob" class="form-control" />
+          <div class="error-message" *ngIf="registerForm.get('dob')?.invalid && registerForm.get('dob')?.touched">
+            Date of Birth is required.
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="mobile">Mobile Number</label>
+          <input formControlName="mobile" type="text" id="mobile" class="form-control" />
+          <div class="error-message" *ngIf="registerForm.get('mobile')?.invalid && registerForm.get('mobile')?.touched">
+            Mobile Number is required and must be 10 digits long.
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="address">Address</label>
+          <input formControlName="address" type="text" id="address" class="form-control" />
+          <div class="error-message" *ngIf="registerForm.get('address')?.invalid && registerForm.get('address')?.touched">
+            Address is required.
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="state">State</label>
+          <input formControlName="state" type="text" id="state" class="form-control" />
+          <div class="error-message" *ngIf="registerForm.get('state')?.invalid && registerForm.get('state')?.touched">
+            State is required.
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="country">Country</label>
+          <input formControlName="country" type="text" id="country" class="form-control" />
+          <div class="error-message" *ngIf="registerForm.get('country')?.invalid && registerForm.get('country')?.touched">
+            Country is required.
+          </div>
         </div>
       </div>
-      <div class="form-group">
-        <label for="lastName">Last Name</label>
-        <input formControlName="lastName" type="text" id="lastName" class="form-control">
-        <div class="error-message" *ngIf="registerForm.get('lastName')?.invalid && registerForm.get('lastName')?.touched">
-          Last Name is required and must be at least 2 characters long.
+
+      <!-- Second column: Remaining form-group elements -->
+      <div class="column">
+        <div class="form-group">
+          <label for="relativeName">Relative Name</label>
+          <input formControlName="relativeName" type="text" id="relativeName" class="form-control" />
+          <div class="error-message" *ngIf="registerForm.get('relativeName')?.invalid && registerForm.get('relativeName')?.touched">
+            Relative Name is required.
+          </div>
         </div>
-      </div>
-      <div class="form-group">
-        <label for="dob">Date of Birth</label>
-        <input formControlName="dob" type="date" id="dob" class="form-control">
-        <div class="error-message" *ngIf="registerForm.get('dob')?.invalid && registerForm.get('dob')?.touched">
-          Date of Birth is required.
+        <div class="form-group">
+          <label for="relativeNumber">Relative Number</label>
+          <input formControlName="relativeNumber" type="text" id="relativeNumber" class="form-control" />
+          <div class="error-message" *ngIf="registerForm.get('relativeNumber')?.invalid && registerForm.get('relativeNumber')?.touched">
+            Relative Number is required and must be 10 digits long.
+          </div>
         </div>
-      </div>
-      <div class="form-group">
-        <label for="mobile">Mobile Number</label>
-        <input formControlName="mobile" type="text" id="mobile" class="form-control">
-        <div class="error-message" *ngIf="registerForm.get('mobile')?.invalid && registerForm.get('mobile')?.touched">
-          Mobile Number is required and must be 10 digits long.
+        <div class="form-group">
+          <label for="illnessDetails">Existing Illness Details (if any)</label>
+          <textarea formControlName="illnessDetails" id="illnessDetails" class="form-control"></textarea>
         </div>
-      </div>
-      <div class="form-group">
-        <label for="address">Address</label>
-        <input formControlName="address" type="text" id="address" class="form-control">
-        <div class="error-message" *ngIf="registerForm.get('address')?.invalid && registerForm.get('address')?.touched">
-          Address is required.
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input formControlName="password" type="password" id="password" class="form-control" />
+          <div class="error-message" *ngIf="registerForm.get('password')?.invalid && registerForm.get('password')?.touched">
+            Password is required and must be at least 6 characters long.
+          </div>
         </div>
-      </div>
-      <div class="form-group">
-        <label for="state">State</label>
-        <input formControlName="state" type="text" id="state" class="form-control">
-        <div class="error-message" *ngIf="registerForm.get('state')?.invalid && registerForm.get('state')?.touched">
-          State is required.
+        <div class="form-group">
+          <label for="confirmPassword">Confirm Password</label>
+          <input formControlName="confirmPassword" type="password" id="confirmPassword" class="form-control" />
+          <div class="error-message" *ngIf="registerForm.get('confirmPassword')?.invalid && registerForm.get('confirmPassword')?.touched">
+            Confirm Password is required and must match the password.
+          </div>
         </div>
+        <a routerLink="/login" class="register-link">Already have an account? Login</a>
+        <button type="submit" [disabled]="registerForm.invalid" class="btn-submit">Submit</button>
       </div>
-      <div class="form-group">
-        <label for="country">Country</label>
-        <input formControlName="country" type="text" id="country" class="form-control">
-        <div class="error-message" *ngIf="registerForm.get('country')?.invalid && registerForm.get('country')?.touched">
-          Country is required.
-        </div>
-      </div>
-      <div class="form-group">
-        <label for="relativeName">Relative Name</label>
-        <input formControlName="relativeName" type="text" id="relativeName" class="form-control">
-        <div class="error-message" *ngIf="registerForm.get('relativeName')?.invalid && registerForm.get('relativeName')?.touched">
-          Relative Name is required.
-        </div>
-      </div>
-      <div class="form-group">
-        <label for="relativeNumber">Relative Number</label>
-        <input formControlName="relativeNumber" type="text" id="relativeNumber" class="form-control">
-        <div class="error-message" *ngIf="registerForm.get('relativeNumber')?.invalid && registerForm.get('relativeNumber')?.touched">
-          Relative Number is required and must be 10 digits long.
-        </div>
-      </div>
-      <div class="form-group">
-        <label for="illnessDetails">Existing Illness Details (if any)</label>
-        <textarea formControlName="illnessDetails" id="illnessDetails" class="form-control"></textarea>
-      </div>
-      <div class="form-group">
-        <label for="password">Password</label>
-        <input formControlName="password" type="password" id="password" class="form-control">
-        <div class="error-message" *ngIf="registerForm.get('password')?.invalid && registerForm.get('password')?.touched">
-          Password is required and must be at least 6 characters long.
-        </div>
-      </div>
-      <div class="form-group">
-        <label for="confirmPassword">Confirm Password</label>
-        <input formControlName="confirmPassword" type="password" id="confirmPassword" class="form-control">
-        <div class="error-message" *ngIf="registerForm.get('confirmPassword')?.invalid && registerForm.get('confirmPassword')?.touched">
-          Confirm Password is required and must match the password.
-        </div>
-      </div>
-      <a routerLink="/login" class="register-link">Aleady have an account? Login</a>
-      <button type="submit" [disabled]="registerForm.invalid" class="btn-submit">Submit</button>
-    </form>
-  </div>
-  
+    </div>
+  </form>
+</div>

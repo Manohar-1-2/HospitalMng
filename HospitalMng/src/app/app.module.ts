@@ -11,6 +11,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AdminPageComponent } from './admin-page/admin-page.component';
 import { PatientPageComponent } from './patient-page/patient-page.component';
 import { EditPageComponent } from './edit-page/edit-page.component';
+import { PatientDetailsComponent } from './patient-details/patient-details.component';
+import { DocterDetailsComponent } from './docter-details/docter-details.component';
+import { AddDocterComponent } from './add-docter/add-docter.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +23,10 @@ import { EditPageComponent } from './edit-page/edit-page.component';
     HomeComponent,
     AdminPageComponent,
     PatientPageComponent,
-    EditPageComponent
+    EditPageComponent,
+    PatientDetailsComponent,
+    DocterDetailsComponent,
+    AddDocterComponent
   ],
   imports: [
     BrowserModule,

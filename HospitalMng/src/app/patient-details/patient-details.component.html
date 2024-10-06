@@ -1,0 +1,80 @@
+<div class="user-list">
+    <h2>Patients</h2>
+    <div *ngFor="let user of data" class="user-card">
+        <div class="user-info">
+            <!-- Collapsible User Name -->
+            <div (click)="user.isExpanded = !user.isExpanded">
+                <h3>{{ user.firstName }} {{ user.lastName }}</h3>
+            </div>
+
+            <!-- Conditionally render user details based on isExpanded -->
+            <div *ngIf="user.isExpanded">
+                <div class="info">
+                    <h3>Personal Information</h3>
+                    <p><strong>User ID:</strong> {{ user.userUID }}</p>
+                    <p><strong>Date of Birth:</strong> {{ user.dob | date }}</p>
+                    <p><strong>Mobile:</strong> {{ user.mobile }}</p>
+                    <p><strong>Address:</strong> {{ user.address }}</p>
+                    <p><strong>State:</strong> {{ user.state }}</p>
+                    <p><strong>Country:</strong> {{ user.country }}</p>
+                </div>
+
+                <div class="relative-info">
+                    <h3>Relative Information</h3>
+                    <p><strong>Name:</strong> {{ user.relativeName }}</p>
+                    <p><strong>Number:</strong> {{ user.relativeNumber }}</p>
+                </div>
+
+                <!-- Illness Details -->
+                <div class="illness-info">
+                    <h3>Illness Details</h3>
+                    <p>{{ user.illnessDetails }}</p>
+                </div>
+
+                <!-- Existing reports -->
+<!-- Existing reports -->
+                <div *ngIf="user.reports?.length > 0" class="upload">
+                    <h3>Uploaded Reports</h3>
+                    <table class="report-table">
+                        <thead>
+                            <tr>
+                                <th>Title</th>
+                                <th>File Name</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let report of user.reports">
+                                <td *ngIf="user.userUID === report.userUID">{{ report.title }}</td>
+                                <td *ngIf="user.userUID === report.userUID">{{ report.fileName }}</td>
+                                <td>
+                                    <button (click)="downloadReport(report.fileName)">Download</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+
+                <!-- Collapsible New Report Form -->
+                <div>
+                    <h3 (click)="user.isUploadExpanded = !user.isUploadExpanded" class="collapsible-header">Create New Report</h3>
+                    <div *ngIf="user.isUploadExpanded" class="new-report-form">
+                        <form (ngSubmit)="uploadReport(user.userUID)">
+                            <div class="form-group">
+                                <label for="reportTitle">Title:</label>
+                                <input type="text" id="reportTitle" [(ngModel)]="newReport.title" name="reportTitle" class="form-control" />
+                            </div>
+                            <div class="form-group">
+                                <label for="reportFile">Upload PDF:</label>
+                                <input type="file" id="reportFile" (change)="onFileChange($event, user.userUID)" name="reportFile" class="form-control" />
+                            </div>
+                            <button type="submit" class="btn btn-primary">Upload Report</button>
+                        </form>
+                    </div>
+                </div>
+                <button class="edit-btn" (click)="editUser(user)">Edit</button>
+            </div>
+        </div>
+    </div>
+</div>

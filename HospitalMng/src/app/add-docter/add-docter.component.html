@@ -1,0 +1,38 @@
+<div class="add-doctor-form">
+    <h2>Add New Doctor</h2>
+    
+    <form (ngSubmit)="addDoctor()" #doctorForm="ngForm" class="doctor-form">
+      
+        <div class="form-group">
+            <label for="firstName">First Name:</label>
+            <input type="text" id="firstName" [(ngModel)]="newDoctor.firstName" name="firstName" class="form-control" required />
+        </div>
+  
+        <div class="form-group">
+            <label for="lastName">Last Name:</label>
+            <input type="text" id="lastName" [(ngModel)]="newDoctor.lastName" name="lastName" class="form-control" required />
+        </div>
+  
+        <div class="form-group">
+            <label for="speciality">Speciality:</label>
+            <input type="text" id="speciality" [(ngModel)]="newDoctor.speciality" name="speciality" class="form-control" required />
+        </div>
+  
+        <div class="form-group">
+            <label for="location">Location:</label>
+            <input type="text" id="location" [(ngModel)]="newDoctor.location" name="location" class="form-control" required />
+        </div>
+  
+        <div class="form-group">
+            <label for="educationQualification">Education Qualification:</label>
+            <input type="text" id="educationQualification" [(ngModel)]="newDoctor.educationQualification" name="educationQualification" class="form-control" />
+        </div>
+  
+        <div class="form-group">
+            <label for="yearsOfExperience">Years of Experience:</label>
+            <input type="number" id="yearsOfExperience" [(ngModel)]="newDoctor.yearsOfExperience" name="yearsOfExperience" class="form-control" required min="0" />
+        </div>
+  
+        <button type="submit" [disabled]="doctorForm.invalid" class="btn btn-primary">Add Doctor</button>
+    </form>
+</div>

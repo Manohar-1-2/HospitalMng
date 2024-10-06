@@ -157,7 +157,21 @@ app.MapGet("/admin", [Authorize(Roles = "admin")] async (ApplicationDbContext db
     // Return the list of non-admin users
     return Results.Ok(nonAdminUsers);
 });
+app.MapGet("/admin/getdoctersDetails", [Authorize(Roles = "admin")] async (ApplicationDbContext dbContext) =>
+{
+    var doctors = await dbContext.Doctors.ToListAsync();
+    return Results.Ok(doctors);
+});
 
+app.MapPost("/admin/adddoctersDetails", [Authorize(Roles = "admin")] async (Doctor doctor, ApplicationDbContext dbContext) =>
+{
+    // Add the new doctor to the database
+    await dbContext.Doctors.AddAsync(doctor);
+    await dbContext.SaveChangesAsync();
+
+    // Return a success message with the new DoctorId
+    return Results.Ok(new { Message = "Doctor added successfully", DoctorId = doctor.DoctorId });
+});
 app.MapPost("/admin/editpatientdetials", [Authorize(Roles = "admin")] async (ApplicationDbContext dbContext,User user) =>
 {
     var patient = await dbContext.Users.FirstOrDefaultAsync(p => p.UserUID == user.UserUID);
@@ -232,17 +246,16 @@ app.MapGet("/admin/downloadreport/{fileName}", [Authorize] async (string fileNam
     // Get the UserUID of the currently logged-in user
     var currentUserId = httpContext.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
 
-    // Define the path where files are stored
-    var filePath = Path.Combine("uploads", fileName); // Adjust the path as necessary
+    var filePath = Path.Combine("uploads", fileName); 
 
-    // Check if the file exists
+    Console.WriteLine("hai");
     if (!System.IO.File.Exists(filePath))
     {
         return Results.NotFound("File not found.");
     }
 
     // Get the report from the database
-    var report = await dbContext.Reports.FirstOrDefaultAsync(r => r.FileName == filePath);
+    var report = await dbContext.Reports.FirstOrDefaultAsync(r => r.FileName == fileName);
 
     if (report == null)
     {
@@ -262,10 +275,33 @@ app.MapGet("/admin/downloadreport/{fileName}", [Authorize] async (string fileNam
     return Results.File(fileBytes, "application/pdf", fileName); // Change MIME type as necessary
 });
 
-app.MapGet("/patient", [Authorize(Roles = "patient")] () =>
+app.MapGet("/patient", [Authorize(Roles = "patient")] async (ApplicationDbContext dbContext, HttpContext httpContext) =>
 {
-    return Results.Ok("Welcome, Patient!");
+    // Retrieve the user UID from claims
+    
+   var userUid = httpContext.User.FindFirst(ClaimTypes.Name)?.Value;
+    Console.WriteLine("jjj");
+    if (userUid == null)
+    {
+        return Results.Unauthorized();
+    }
+
+    // Assuming the claim value is a string
+   
+
+    // Fetch patient details from the database based on userUID
+    var patientDetails = await dbContext.Users
+        .FirstOrDefaultAsync(p => p.UserUID == userUid);
+
+    if (patientDetails == null)
+    {
+        return Results.NotFound("Patient not found.");
+    }
+
+    // Return the patient details
+    return Results.Ok(patientDetails);
 });
+
 
 app.Run();
 
@@ -276,6 +312,7 @@ public class ApplicationDbContext : DbContext
     // Define your DbSet(s) here
     public DbSet<User> Users { get; set; }
     public DbSet<Report> Reports { get; set; }
+     public DbSet<Doctor> Doctors { get; set; }
 }
 
 public class User
@@ -295,6 +332,18 @@ public class User
     public string IllnessDetails { get; set; }
     public string Role { get; set; } // Corresponds to illnessDetails
 }
+
+public class Doctor
+{
+    public Guid DoctorId { get; set; } = Guid.NewGuid(); // Automatically generates a unique GUID
+    public string FirstName { get; set; }
+    public string LastName { get; set; }
+    public string Speciality { get; set; }
+    public string Location { get; set; }
+    public string EducationQualification { get; set; }
+    public int YearsOfExperience { get; set; }
+}
+
 public class Report
 {
 

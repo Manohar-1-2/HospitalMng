@@ -1,0 +1,74 @@
+/* General theme */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f4f8;
+    background-image: url("/HospitalMng/public/vecteezy_doctor-in-hospital-background-with-copy-space_.jpg");
+    color: #333;
+}
+
+/* Container styling */
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    text-align: center;
+}
+
+/* Heading styling */
+.container h1 {
+    font-size: 2.5rem;
+    color: #0d6efd; /* Hospital-themed blue color */
+    margin-bottom: 20px;
+}
+
+/* Options container */
+.options {
+    display: flex;
+    gap: 20px;
+}
+
+/* Button styling */
+button {
+    padding: 15px 30px;
+    font-size: 1rem;
+    color: white;
+    background-color: #0d6efd; /* Blue color */
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #0b5ed7;
+}
+
+button:focus {
+    outline: none;
+    box-shadow: 0 0 5px rgba(13, 110, 253, 0.5);
+}
+
+button:active {
+    transform: scale(0.98);
+}
+
+/* Responsive design */
+@media (max-width: 600px) {
+    .container h1 {
+        font-size: 2rem;
+    }
+
+    button {
+        width: 100%;
+        padding: 12px 20px;
+    }
+
+    .options {
+        flex-direction: column;
+        gap: 10px;
+    }
+}

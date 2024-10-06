@@ -1,151 +1,118 @@
-/* General layout */
+
+
 .register-container {
-    max-width: 600px;
-    margin: 50px auto;
-    padding: 25px;
-    background-color: #f8f9fa;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    font-family: Arial, sans-serif;
-  }
-  
-  h2 {
-    text-align: center;
-    margin-bottom: 20px;
-    color: #343a40;
-  }
-  
-  .register-form {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .form-group {
-    margin-bottom: 15px;
-  }
-  
-  label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
-    color: #495057;
-  }
-  
-  .form-control {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ced4da;
-    border-radius: 5px;
-    font-size: 16px;
-  }
-  
-  .form-control:focus {
-    outline: none;
-    border-color: #80bdff;
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.25);
-  }
-  
-  textarea.form-control {
-    height: 100px;
-    resize: none;
-  }
-  
-  .btn-submit {
-    background-color: #007bff;
-    color: white;
-    padding: 10px 15px;
-    border: none;
-    border-radius: 5px;
-    font-size: 16px;
-    cursor: pointer;
-    margin-top: 20px;
-  }
-  
-  .btn-submit:disabled {
-    background-color: #6c757d;
-    cursor: not-allowed;
-  }
-  
-  .btn-submit:hover:not(:disabled) {
-    background-color: #0056b3;
-  }
-  /* Styling for the error messages */
+  max-width: 700px; /* Increased width for two columns */
+  margin: 50px auto;
+  padding: 30px;
+  background-color: #ffffff; /* Clean, professional background */
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  font-family: Arial, sans-serif;
+}
+
+.heading {
+  text-align: center;
+  margin-bottom: 25px;
+  color: #0d6efd; /* Hospital-themed blue color */
+  font-size: 1.8rem;
+}
+/* Grid container for two columns */
+.grid-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 20px; /* Adds space between the columns */
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.register-container {
+  max-width: 800px;
+  margin: 50px auto;
+  padding: 25px;
+  background-color: #f8f9fa;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  font-family: Arial, sans-serif;
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #343a40;
+}
+
+.form-control {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ced4da;
+  border-radius: 5px;
+  font-size: 16px;
+  box-sizing: border-box;
+}
+
+textarea.form-control {
+  height: 100px;
+  resize: none;
+}
+
+.btn-submit {
+  background-color: #007bff;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+.btn-submit:disabled {
+  background-color: #6c757d;
+  cursor: not-allowed;
+}
+
+.btn-submit:hover:not(:disabled) {
+  background-color: #0056b3;
+}
+
+.register-link {
+  font-size: 14px;
+  color: #007bff;
+  text-decoration: none;
+  margin-top: 10px;
+}
+
+.register-link:hover {
+  text-decoration: underline;
+}
+
 .error-message {
-    color: red;
-    font-size: 12px;
-    margin-top: 5px;
-  }
-  
-  /* General layout and styling */
-  .register-container {
-    max-width: 600px;
-    margin: 50px auto;
-    padding: 25px;
-    background-color: #f8f9fa;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    font-family: Arial, sans-serif;
-  }
-  
-  h2 {
-    text-align: center;
-    margin-bottom: 20px;
-    color: #343a40;
-  }
-  
-  .register-form {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .form-group {
-    margin-bottom: 15px;
-  }
-  
-  label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
-    color: #495057;
-  }
-  
-  .form-control {
-    width: 100%;
-    padding: 8px 2px;
-    border: 1px solid #ced4da;
-    border-radius: 5px;
-    font-size: 16px;
-  }
-  
-  textarea.form-control {
-    height: 100px;
-    resize: none;
-  }
-  
-  .btn-submit {
-    background-color: #007bff;
-    color: white;
-    padding: 10px 15px;
-    border: none;
-    border-radius: 5px;
-    font-size: 16px;
-    cursor: pointer;
-    margin-top: 20px;
-  }
-  
-  .btn-submit:disabled {
-    background-color: #6c757d;
-    cursor: not-allowed;
-  }
-  
-  .btn-submit:hover:not(:disabled) {
-    background-color: #0056b3;
-  }
-  .register-link {
-    font-size: 14px;
-    color: #007bff;
-    text-decoration: none;
-  }
-  .register-link:hover {
-    text-decoration: underline;
-  }
+  color: red;
+  font-size: 12px;
+  margin-top: 5px;
+}
+.personal-info {
+  cursor: pointer; /* Change cursor to indicate clickable area */
+  background-color: #f0f0f0; /* Light background */
+  padding: 10px;
+  border-radius: 5px; /* Rounded corners */
+  margin-bottom: 10px; /* Space between user cards */
+}
+
+.personal-info h3 {
+  margin: 0; /* Remove default margin */
+}
+
+.user-info {
+  border: 1px solid #ccc; /* Add border to user card */
+  border-radius: 5px; /* Rounded corners for the card */
+  padding: 15px; /* Padding inside the card */
+  background-color: #fff; /* White background for user card */
+}

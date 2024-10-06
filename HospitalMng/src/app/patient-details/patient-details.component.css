@@ -1,0 +1,150 @@
+/* User list container */
+.user-list {
+    padding: 20px;
+    background-color: #f8f9fa; /* Light background for contrast */
+    border-radius: 8px;
+  }
+  
+  /* User card styling */
+  .user-card {
+    background-color: white;
+    border: 1px solid #dee2e6; /* Light border */
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .user-card:hover {
+    transform: translateY(-5px); /* Lift effect on hover */
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2); /* Deeper shadow on hover */
+  }
+  
+  /* User info styling */
+  .user-info p {
+    margin: 5px 0;
+  }
+  
+  /* Relative and illness info styling */
+  .relative-info,
+  .illness-info,.info{
+    background-color: #e9ecef; /* Light grey background */
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: 15px;
+  }
+  
+  .relative-info h3,
+  .illness-info h3 ,.personal-info h3 {
+    margin-top: 0;
+  }
+  
+  /* Uploaded reports list */
+  .user-info h3 {
+    margin-top: 15px;
+  }
+  
+  .user-info ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .user-info li {
+    margin: 10px 0;
+  }
+  
+  /* New report form styling */
+  .new-report-form {
+    margin-top: 20px;
+    border-top: 1px solid #dee2e6; /* Top border to separate sections */
+    padding-top: 15px;
+  }
+  
+  .form-group {
+    margin-bottom: 15px;
+  }
+  
+  .form-group label {
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  .form-control {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+  }
+  
+  .form-control:focus {
+    outline: none;
+    border-color: #007bff; /* Highlight border on focus */
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Blue shadow on focus */
+  }
+  
+  /* Button styling */
+  .btn {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .btn-primary {
+    background-color: #007bff;
+    color: white;
+  }
+  
+  .btn-primary:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+  }
+  
+  /* Edit button styling */
+  .edit-btn {
+    background-color: #282e29; /* Green background */
+    color: white;
+    margin-top: 15px;
+  }
+
+  .edit-btn:hover {
+    background-color: #413c3c; /* Darker green on hover */
+  }
+  .report-table {
+    width: 100%; /* Full width of the container */
+    border-collapse: collapse; /* Collapse borders for a cleaner look */
+    margin-top: 10px; /* Space above the table */
+}
+
+.report-table th,
+.report-table td {
+    border: 1px solid #ddd; /* Border for table cells */
+    padding: 8px; /* Padding inside cells */
+    text-align: left; /* Align text to the left */
+}
+
+.report-table th {
+    background-color: #f2f2f2; /* Light background for table headers */
+    color: #333; /* Darker text color for headers */
+}
+
+.report-table tr:hover {
+    background-color: #f1f1f1; /* Highlight row on hover */
+}
+.collapsible-header {
+    cursor: pointer; /* Change cursor to indicate clickable area */
+    color: #007bff; /* Bootstrap primary color */
+    text-decoration: underline; /* Underline to indicate it is clickable */
+}
+
+.collapsible-header:hover {
+    color: #0056b3; /* Darker shade on hover */
+}
+
+.new-report-form {
+    margin-top: 10px; /* Space above the form */
+    padding: 10px; /* Padding for the form */
+    background-color: #f9f9f9; /* Light background for the form */
+    border-radius: 5px; /* Rounded corners for the form */
+}

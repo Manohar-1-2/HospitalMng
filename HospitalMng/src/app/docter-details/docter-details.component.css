@@ -1,0 +1,51 @@
+/* General container styles */
+.container {
+    max-width: 1200px; /* Set a max width for the container */
+    margin: 20px auto; /* Center the container with auto margin */
+    padding: 20px; /* Add padding for inner spacing */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow effect */
+    background-color: #ffffff; /* White background */
+}
+
+/* Heading styles */
+h2 {
+    text-align: center; /* Center align the heading */
+    color: #333; /* Dark color for the heading */
+    margin-bottom: 20px; /* Space below the heading */
+}
+
+/* Table styles */
+.table {
+    width: 100%; /* Full width of the container */
+    border-collapse: collapse; /* Collapse borders */
+    margin-top: 20px; /* Space above the table */
+}
+
+/* Table header styles */
+.table thead {
+    background-color: #007bff; /* Blue background for the header */
+    color: white; /* White text color */
+}
+
+.table th, .table td {
+    padding: 12px 15px; /* Padding for table cells */
+    text-align: left; /* Left align text */
+    border-bottom: 1px solid #dddddd; /* Light border for rows */
+}
+
+/* Table row styles */
+.table tbody tr:hover {
+    background-color: #f1f1f1; /* Highlight row on hover */
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+    .table {
+        font-size: 14px; /* Smaller font size on small screens */
+    }
+
+    .table th, .table td {
+        padding: 8px; /* Less padding for smaller screens */
+    }
+}
