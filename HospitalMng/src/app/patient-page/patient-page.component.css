@@ -1,0 +1,121 @@
+/* User List Container */
+.user-list {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* User Card */
+  .user-card {
+    padding: 20px;
+    margin-bottom: 20px;
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    transition: box-shadow 0.3s ease;
+  }
+  
+  .user-card:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+  
+  /* User Information */
+  .user-info p {
+    margin: 10px 0;
+    font-size: 16px;
+
+  }
+  
+  .user-info p strong {
+    font-weight: 600;
+
+  }
+  
+  /* Details Sections */
+  details {
+    margin: 10px 0;
+    font-size: 16px;
+    background-color: #fafafa;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+  }
+  
+  details summary {
+    font-weight: 600;
+    cursor: pointer;
+  }
+  
+  details[open] summary {
+    color: #007BFF;
+  }
+  
+  /* Uploaded Reports */
+  .uploaded-reports h3 {
+    margin-top: 20px;
+    font-size: 18px;
+    font-weight: 600;
+
+  }
+  
+  .uploaded-reports ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .uploaded-reports ul li {
+    margin: 5px 0;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f5f5f5;
+  }
+  
+  .uploaded-reports ul li button {
+    padding: 5px 10px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .uploaded-reports ul li button:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Mobile Responsiveness */
+  @media (max-width: 600px) {
+    .user-card {
+      padding: 15px;
+    }
+    
+    .user-info p {
+      font-size: 14px;
+    }
+  
+    details {
+      font-size: 14px;
+    }
+    
+    .uploaded-reports ul li {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+ .personal-info{
+    background-color: #e9ecef; /* Light grey background */
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: 15px;
+  }
+  .personal-info h3{
+    margin-top: 0;
+    color: black;
+  }

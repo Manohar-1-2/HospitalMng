@@ -1,14 +1,18 @@
 <div class="user-list">
-    <h2>Users</h2>
+    <h2>Welcome {{user.firstName }}</h2>
     <div  class="user-card">
       <div class="user-info">
-        <p><strong>User ID:</strong> {{ user.userUID }}</p>
-        <p><strong>Name:</strong> {{ user.firstName }} {{ user.lastName }}</p>
-        <p><strong>Date of Birth:</strong> {{ user.dob | date }}</p>
-        <p><strong>Mobile:</strong> {{ user.mobile }}</p>
-        <p><strong>Address:</strong> {{ user.address }}</p>
-        <p><strong>State:</strong> {{ user.state }}</p>
-        <p><strong>Country:</strong> {{ user.country }}</p>
+        <div class="personal-info">
+            <h3>Personal Information</h3>
+            <p><strong>User ID:</strong> {{ user.userUID }}</p>
+            <p><strong>Name:</strong> {{ user.firstName }} {{ user.lastName }}</p>
+            <p><strong>Date of Birth:</strong> {{ user.dob | date }}</p>
+            <p><strong>Mobile:</strong> {{ user.mobile }}</p>
+            <p><strong>Address:</strong> {{ user.address }}</p>
+            <p><strong>State:</strong> {{ user.state }}</p>
+            <p><strong>Country:</strong> {{ user.country }}</p>
+        </div>
+        
         <details class="relative-details">
           <summary>Relative Information</summary>
           <p><strong>Name:</strong> {{ user.relativeName }}</p>

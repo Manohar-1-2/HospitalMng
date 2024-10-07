@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using BCrypt.Net;
 using Microsoft.AspNetCore.Authorization;
 using System.Security.Claims;
+using System.Numerics;
 
 // Define the DbContext and User class before the top-level statements
 
@@ -71,10 +72,13 @@ app.MapPost("/register", async (ApplicationDbContext dbContext, RegistrationDto 
     // Hash the password
     var hashedPassword = BCrypt.Net.BCrypt.HashPassword(userDto.Password);
     
-    // Create new user
+    var guid = Guid.NewGuid();
+    BigInteger numericGuid = new BigInteger(guid.ToByteArray());
+    string numericGuidString = numericGuid.ToString().Substring(1, 4);
+    string userUID = $"{userDto.FirstName.ToLower()}-{numericGuidString}";
      var user = new User
     {
-        UserUID = Guid.NewGuid().ToString(), // Generate a unique UserUID
+        UserUID = userUID, // Generate a unique UserUID
         PasswordHash = hashedPassword,
         FirstName = userDto.FirstName,
         LastName = userDto.LastName,
@@ -97,7 +101,6 @@ app.MapPost("/register", async (ApplicationDbContext dbContext, RegistrationDto 
 
 app.MapPost("/login", async (ApplicationDbContext dbContext, UserDtoLogin userDto) =>
 {
-    // Find the user by username
     var user = await dbContext.Users.SingleOrDefaultAsync(u => u.UserUID == userDto.UserUID);
     Console.WriteLine(userDto.UserUID);
 
@@ -105,8 +108,6 @@ app.MapPost("/login", async (ApplicationDbContext dbContext, UserDtoLogin userDt
     {
         return Results.Unauthorized();
     }
-
-    // Create JWT Token
     var tokenHandler = new System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler();
     var key = Encoding.UTF8.GetBytes("yourSecretKeyyourSecretKeyyourSecretKey");  // Replace with your actual secret key
     var tokenDescriptor = new SecurityTokenDescriptor

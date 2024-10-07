@@ -1,3 +1,33 @@
+<header class="header">
+  <div class="header-content">
+    <div class="logo">
+      <h2>HospitalMng</h2>
+    </div>
+    <nav class="nav-menu">
+      <ul>
+        <li><a routerLink="/">Home</a></li>
+        <li><a routerLink="/about">About Us</a></li>
+        <li><a routerLink="/services">Services</a></li>
+        <li *ngIf="!isLoggedIn"><a routerLink="/login">Login</a></li>
+        <li *ngIf="isLoggedIn"><a (click)="logout()">Logout</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
 <main class="main">
-  <router-outlet />
+  <router-outlet></router-outlet>
 </main>
+
+<footer class="footer">
+  <div class="footer-content">
+    <p>&copy; 2024 Hospital Name. All Rights Reserved.</p>
+    <nav class="footer-nav">
+      <ul>
+        <li><a routerLink="/privacy">Privacy Policy</a></li>
+        <li><a routerLink="/terms">Terms of Service</a></li>
+        <li><a routerLink="/contact">Contact Us</a></li>
+      </ul>
+    </nav>
+  </div>
+</footer>
