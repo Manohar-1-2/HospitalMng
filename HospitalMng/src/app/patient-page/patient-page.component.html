@@ -22,6 +22,17 @@
           <summary>Illness Details</summary>
           <p>{{ user.illnessDetails }}</p>
         </details>
+        <details>
+          <summary>Appointments</summary>
+          <ul>
+            <li *ngFor="let appointments of user.appointments">
+              <p><strong>Docter Name:</strong> {{appointments.doctor.firstName}} {{appointments.doctor.speciality}}</p>
+              <p><strong>Booked Time:</strong> {{appointments.bookedDateTime }}</p>
+              <p><strong>Slot Date:</strong> {{appointments.slot.date }}</p>
+              <p><strong>Slot Time:</strong> {{appointments.slot.time }}</p>
+            </li>
+          </ul>
+        </details>
         <div *ngIf="user.reports?.length > 0">
           <h3>Uploaded Reports</h3>
           <ul>
@@ -30,7 +41,8 @@
              <button (click)="downloadReport(report.fileName)">Download</button>
             </li>
           </ul>
-        </div>        
+        </div> 
+              
       </div>
     </div>
   </div>

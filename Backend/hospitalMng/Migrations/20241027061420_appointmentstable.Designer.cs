@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -9,9 +10,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace hospitalMng.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241027061420_appointmentstable")]
+    partial class appointmentstable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "8.0.8");
@@ -25,8 +28,7 @@ namespace hospitalMng.Migrations
                     b.Property<DateTime>("BookedDateTime")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("DoctorID")
-                        .IsRequired()
+                    b.Property<Guid>("DoctorID")
                         .HasColumnType("TEXT");
 
                     b.Property<int>("SlotID")
@@ -48,7 +50,8 @@ namespace hospitalMng.Migrations
 
             modelBuilder.Entity("Doctor", b =>
                 {
-                    b.Property<string>("DoctorId")
+                    b.Property<Guid>("DoctorId")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("EducationQualification")
@@ -114,8 +117,7 @@ namespace hospitalMng.Migrations
                     b.Property<DateTime>("Date")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("DoctorID")
-                        .IsRequired()
+                    b.Property<Guid>("DoctorID")
                         .HasColumnType("TEXT");
 
                     b.Property<bool>("IsBooked")

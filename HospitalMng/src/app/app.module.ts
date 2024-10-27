@@ -14,6 +14,7 @@ import { EditPageComponent } from './edit-page/edit-page.component';
 import { PatientDetailsComponent } from './patient-details/patient-details.component';
 import { DocterDetailsComponent } from './docter-details/docter-details.component';
 import { AddDocterComponent } from './add-docter/add-docter.component';
+import { AppointmentsComponent } from './appointments/appointments.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { AddDocterComponent } from './add-docter/add-docter.component';
     EditPageComponent,
     PatientDetailsComponent,
     DocterDetailsComponent,
-    AddDocterComponent
+    AddDocterComponent,
+    AppointmentsComponent
   ],
   imports: [
     BrowserModule,

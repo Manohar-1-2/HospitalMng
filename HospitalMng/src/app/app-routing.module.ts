@@ -10,6 +10,7 @@ import { EditPageComponent } from './edit-page/edit-page.component';
 import { PatientDetailsComponent } from './patient-details/patient-details.component';
 import { DocterDetailsComponent } from './docter-details/docter-details.component';
 import { AddDocterComponent } from './add-docter/add-docter.component';
+import { AppointmentsComponent } from './appointments/appointments.component';
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'register', component: RegisterComponent },
@@ -21,7 +22,8 @@ const routes: Routes = [
       { path: 'add-docter', component: AddDocterComponent },
       { path: 'add-patient', component: RegisterComponent },
       { path: 'edit', component: EditPageComponent},
-      { path: '', redirectTo: 'patient-details', pathMatch: 'full' } // Default child route
+      { path: 'appointments', component: AppointmentsComponent},
+      { path: '', redirectTo: 'patient-details', pathMatch: 'full' }
     ]
   },
   { path: 'patientPage', component: PatientPageComponent,canActivate: [AuthGuard]},

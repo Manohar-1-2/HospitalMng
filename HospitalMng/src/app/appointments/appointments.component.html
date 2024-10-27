@@ -1,0 +1,69 @@
+<form [formGroup]="searchPatientForm" (ngSubmit)="onUserSearch()">
+    <label for="useruid">User UID:</label>
+    <input id="useruid" formControlName="useruid" type="text" required>
+    
+    <button type="submit">Search</button>
+</form>
+<div *ngIf="patients">
+    <h3>Search Results:</h3>
+    <ul>
+      <li *ngFor="let patient of patients">{{ patient.firstName }} ({{ patient.userUID }})
+        <button (click)="onappointment()">Book Appointment</button>
+      </li>
+      <form *ngIf="showdocterform"  [formGroup]="searchDocterForm" (ngSubmit)="onDoctersSearch()">
+        <label for="sp">Specialty:</label>
+        <input id="sp" formControlName="specialty" type="text" required>
+        <label for="loc">Location:</label>
+        <input id="loc" formControlName="location" type="text" required>
+        <button type="submit">Search</button>
+        <div *ngIf="docters">
+            <div class="container">
+                <h2>Doctor Details</h2>
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th>Doctor ID</th>
+                      <th>First Name</th>
+                      <th>Last Name</th>
+                      <th>Speciality</th>
+                      <th>Location</th>
+                      <th>Education Qualification</th>
+                      <th>Years of Experience</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let doctor of docters">
+                      <td>{{ doctor.doctorId }}</td>
+                      <td>{{ doctor.firstName }}</td>
+                      <td>{{ doctor.lastName }}</td>
+                      <td>{{ doctor.speciality }}</td>
+                      <td>{{ doctor.location }}</td>
+                      <td>{{ doctor.educationQualification }}</td>
+                      <td>{{ doctor.yearsOfExperience }}</td>
+                      <td>
+                        <form [formGroup]="getSlotForm" (ngSubmit)="getslots(doctor.doctorId)">
+                            <input type="date" formControlName="date">
+                            <button type="submit">view slots</button>
+                      </form>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+            </div>
+        </div>
+        <div *ngIf="slots">
+            <h3>Available Slots:</h3>
+            <ul>
+              <li *ngFor="let slot of slots">
+                Date: {{ slot.date }}, Time: {{ slot.time}}
+                <button (click)="bookslot(slot.slotID,patients[0].userUID)">Book Slot</button>
+              </li>
+            </ul>
+          </div>
+          <div *ngIf="slots?.length === 0">
+            <p>No available slots for the selected date.</p>
+          </div>
+  
+      </form>
+    </ul>
+</div>

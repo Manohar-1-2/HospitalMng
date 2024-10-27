@@ -52,7 +52,7 @@ export class PatientDetailsComponent implements OnInit {
   uploadReport(userUID: string) {
     const apiUrl = `http://localhost:5280/admin/uploadreports`;
     this.newReport.userId=userUID;
-    console.log("haii...",this.newReport.title,this.newReport.file);
+  
     if (!this.newReport.title || !this.newReport.file) {
       alert('Please provide both a title and a file.');
       return;
