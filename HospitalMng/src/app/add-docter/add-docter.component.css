@@ -56,3 +56,6 @@ label {
     background-color: #ccc; /* Grey background for disabled button */
     cursor: not-allowed; /* Not-allowed cursor */
 }
+small{
+    color: red;
+}

@@ -1,38 +1,90 @@
 <div class="add-doctor-form">
     <h2>Add New Doctor</h2>
-    
-    <form (ngSubmit)="addDoctor()" #doctorForm="ngForm" class="doctor-form">
-      
+
+    <form [formGroup]="addDoctorForm" (ngSubmit)="addDoctor()" class="doctor-form">
+
         <div class="form-group">
             <label for="firstName">First Name:</label>
-            <input type="text" id="firstName" [(ngModel)]="newDoctor.firstName" name="firstName" class="form-control" required />
+            <input
+                type="text"
+                id="firstName"
+                formControlName="firstName"
+                class="form-control"
+            />
+            <div *ngIf="addDoctorForm.get('firstName')?.invalid && addDoctorForm.get('firstName')?.touched">
+                <small *ngIf="addDoctorForm.get('firstName')?.errors?.['required']">First Name is required.</small>
+                <small *ngIf="addDoctorForm.get('firstName')?.errors?.['pattern']">First Name cannot contain numbers.</small>
+            </div>
         </div>
-  
+
         <div class="form-group">
             <label for="lastName">Last Name:</label>
-            <input type="text" id="lastName" [(ngModel)]="newDoctor.lastName" name="lastName" class="form-control" required />
+            <input
+                type="text"
+                id="lastName"
+                formControlName="lastName"
+                class="form-control"
+            />
+            <div *ngIf="addDoctorForm.get('lastName')?.invalid && addDoctorForm.get('lastName')?.touched">
+                <small *ngIf="addDoctorForm.get('lastName')?.errors?.['required']">Last Name is required.</small>
+                <small *ngIf="addDoctorForm.get('lastName')?.errors?.['pattern']">Last Name cannot contain numbers.</small>
+            </div>
         </div>
-  
+
         <div class="form-group">
             <label for="speciality">Speciality:</label>
-            <input type="text" id="speciality" [(ngModel)]="newDoctor.speciality" name="speciality" class="form-control" required />
+            <input
+                type="text"
+                id="speciality"
+                formControlName="speciality"
+                class="form-control"
+            />
+            <div *ngIf="addDoctorForm.get('speciality')?.invalid && addDoctorForm.get('speciality')?.touched">
+                <small *ngIf="addDoctorForm.get('speciality')?.errors?.['required']">Speciality is required.</small>
+            </div>
         </div>
-  
+
         <div class="form-group">
             <label for="location">Location:</label>
-            <input type="text" id="location" [(ngModel)]="newDoctor.location" name="location" class="form-control" required />
+            <input
+                type="text"
+                id="location"
+                formControlName="location"
+                class="form-control"
+            />
+            <div *ngIf="addDoctorForm.get('location')?.invalid && addDoctorForm.get('location')?.touched">
+                <small *ngIf="addDoctorForm.get('location')?.errors?.['required']">Location is required.</small>
+                <small *ngIf="addDoctorForm.get('location')?.errors?.['pattern']">Location cannot contain numbers.</small>
+            </div>
         </div>
-  
+
         <div class="form-group">
             <label for="educationQualification">Education Qualification:</label>
-            <input type="text" id="educationQualification" [(ngModel)]="newDoctor.educationQualification" name="educationQualification" class="form-control" />
+            <input
+                type="text"
+                id="educationQualification"
+                formControlName="educationQualification"
+                class="form-control"
+            />
+            <div *ngIf="addDoctorForm.get('educationQualification')?.invalid && addDoctorForm.get('educationQualification')?.touched">
+                <small *ngIf="addDoctorForm.get('educationQualification')?.errors?.['required']">Education Qualification is required.</small>
+            </div>
         </div>
-  
+
         <div class="form-group">
             <label for="yearsOfExperience">Years of Experience:</label>
-            <input type="number" id="yearsOfExperience" [(ngModel)]="newDoctor.yearsOfExperience" name="yearsOfExperience" class="form-control" required min="0" />
+            <input
+                type="number"
+                id="yearsOfExperience"
+                formControlName="yearsOfExperience"
+                class="form-control"
+            />
+            <div *ngIf="addDoctorForm.get('yearsOfExperience')?.invalid && addDoctorForm.get('yearsOfExperience')?.touched">
+                <small *ngIf="addDoctorForm.get('yearsOfExperience')?.errors?.['required']">Years of Experience is required.</small>
+                <small *ngIf="addDoctorForm.get('yearsOfExperience')?.errors?.['min']">Years of Experience cannot be negative.</small>
+            </div>
         </div>
-  
-        <button type="submit" [disabled]="doctorForm.invalid" class="btn btn-primary">Add Doctor</button>
+
+        <button type="submit" [disabled]="addDoctorForm.invalid" class="btn btn-primary">Add Doctor</button>
     </form>
 </div>

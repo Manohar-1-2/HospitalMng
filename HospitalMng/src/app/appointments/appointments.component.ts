@@ -73,6 +73,7 @@ export class AppointmentsComponent {
           },
           (error) => {
             console.error('Error fetching slots', error);
+            alert("No slots found...")
             
           }
         );

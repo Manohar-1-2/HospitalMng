@@ -8,14 +8,17 @@
           <label for="firstName">First Name</label>
           <input formControlName="firstName" type="text" id="firstName" class="form-control" />
           <div class="error-message" *ngIf="registerForm.get('firstName')?.invalid && registerForm.get('firstName')?.touched">
-            First Name is required and must be at least 2 characters long.
+            <p *ngIf="!registerForm.get('firstName')?.errors?.['pattern']">First Name is required and must be at least 2 characters long.</p>
+            <p *ngIf="registerForm.get('firstName')?.errors?.['pattern']">FirstName cannot contain numbers.</p>
           </div>
         </div>
         <div class="form-group">
           <label for="lastName">Last Name</label>
           <input formControlName="lastName" type="text" id="lastName" class="form-control" />
+          
           <div class="error-message" *ngIf="registerForm.get('lastName')?.invalid && registerForm.get('lastName')?.touched">
-            Last Name is required and must be at least 2 characters long.
+            <p *ngIf="!registerForm.get('lastName')?.errors?.['pattern']">LastName Name is required and must be at least 2 characters long.</p>
+            <p *ngIf="registerForm.get('lastName')?.errors?.['pattern']">LastName cannot contain numbers.</p>
           </div>
         </div>
         <div class="form-group">

@@ -57,7 +57,7 @@ public static class AdminEndpoints
                 .ToListAsync();
             
             
-
+            
             Console.WriteLine(doctorId);
             if (emptySlots.Count == 0)
             {
@@ -155,6 +155,45 @@ public static class AdminEndpoints
             return Results.Ok("Patient details updated successfully.");
         });
 
+        app.MapGet("/admin/createslots", async (string doctorId, ApplicationDbContext dbContext) =>
+        {
+            // Define the two times for each day
+            var slotTimes = new List<TimeSpan> 
+            { 
+                new TimeSpan(11, 0, 0), // 11:00 AM
+                new TimeSpan(14, 0, 0)  // 2:00 PM
+            };
+            
+            // Get today's date
+            var startDate = DateTime.Today;
+            
+            // Insert slots for the next 6 days
+            for (int day = 0; day < 6; day++)
+            {
+                // Calculate the date for each day
+                var date = startDate.AddDays(day);
+                
+                // Create a slot for each specified time
+                foreach (var time in slotTimes)
+                {
+                    var slot = new Slot
+                    {
+                        Date = date,
+                        Time = time,
+                        IsBooked = false,
+                        DoctorID = doctorId
+                    };
+                    
+                    // Add the slot to the database context
+                    dbContext.Slots.Add(slot);
+                }
+            }
+            
+            // Save changes to the database
+            await dbContext.SaveChangesAsync();
+
+            return Results.Ok("Slots created successfully for the next 6 days.");
+        });
 
     }
 }
